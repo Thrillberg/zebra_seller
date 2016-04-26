@@ -1,0 +1,8 @@
+<h2><%= current_user.email %>'s shopping cart</h2>
+
+<% @shopping_cart.products.each do |product| %>
+  <strong><%= product.name %></strong><br />
+  <%= product.price %><br />
+  <%= product.description %>
+  <hr />
+<% end %>
