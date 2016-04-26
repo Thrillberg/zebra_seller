@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-buyer = User.create(email: "buyer@test.com", password: "password")
-seller = User.create(email: "seller@test.com", password: "password")
-zebra = Product.create(name: "Normal Zebra", price: 4000.00, description: "A normal zebra")
-fast_zebra = Product.create(name: "Fast Zebra", price: 5000.00, description: "A fast zebra")
-dumb_zebra = Product.create(name: "Dumb Zebra", price: 3000.00, description: "A dumb zebra")
+buyer = User.create!(email: "buyer@test.com", password: "password", password_confirmation: "password")
+seller = User.create!(email: "seller@test.com", password: "password", password_confirmation: "password")
+zebra = Product.create!(name: "Normal Zebra", price: 4000.00, description: "A normal zebra", seller_id: 2)
+fast_zebra = Product.create!(name: "Fast Zebra", price: 5000.00, description: "A fast zebra", seller_id: 2)
+dumb_zebra = Product.create!(name: "Dumb Zebra", price: 3000.00, description: "A dumb zebra", seller_id: 2)

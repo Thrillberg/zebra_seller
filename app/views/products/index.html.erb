@@ -2,4 +2,6 @@
   <%= link_to product.name, product_path(product) %><br />
 <% end %>
 <hr />
-<%= link_to "Shopping Cart", shopping_cart_path(current_user) %>
+<% if current_user && buyers_shopping_cart %>
+  <%= link_to "Shopping Cart", shopping_cart_path(current_user) %>
+<% end %>

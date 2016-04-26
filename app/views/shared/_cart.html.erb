@@ -1,3 +1,11 @@
 <h2>Your Cart</h2>
 
-<% binding.pry %>
+<% if buyers_shopping_cart %>
+  <% buyers_shopping_cart.products.each do |product| %>
+    <%= product.name %><br />
+    <%= product.price %><br />
+    <%= product.description %><br />
+  <% end %>
+<% else %>
+  Empty. Buy things!
+<% end %>
