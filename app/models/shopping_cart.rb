@@ -4,7 +4,7 @@
 #
 #  id            :integer
 #  buyer_id      :integer
-#  seller_id     :integer
+#  total_price   :float
 #
 
 class ShoppingCart < ActiveRecord::Base

@@ -6,6 +6,7 @@
 #  shopping_cart_id      :integer
 #  product_id            :integer
 #  quantity              :integer
+#  price                 :float
 #
 
 class ShoppingCartItem < ActiveRecord::Base
