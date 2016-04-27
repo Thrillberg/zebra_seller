@@ -19,7 +19,9 @@ class ProductsController < ApplicationController
       product_in_cart.save
     else
       item = ShoppingCartItem.new(shopping_cart_id: buyers_shopping_cart.id, product_id: Product.find(params[:product_id]).id)
-      item.save
+      buyers_shopping_cart.products << Product.find(params[:product_id])
+      buyers_shopping_cart.shopping_cart_items.last.quantity = 1
+      buyers_shopping_cart.shopping_cart_items.last.save
     end
     flash[:notice] = "#{Product.find(params[:product_id]).name} has been added to your cart"
     redirect_to :back

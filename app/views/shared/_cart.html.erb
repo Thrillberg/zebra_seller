@@ -5,7 +5,7 @@
     <%= product.name %><br />
     <%= product.price %><br />
     <%= product.description %><br />
-    Quantity: <%= product.shopping_cart_items.where(product_id: product.id)[0].quantity %>
+    Quantity: <%= product.shopping_cart_items.where(product_id: product.id)[0].quantity %><br />
   <% end %>
 <% else %>
   Empty. Buy things!
