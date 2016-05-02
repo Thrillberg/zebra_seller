@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
 
   def buyers_shopping_cart
-    return ShoppingCart.where(buyer_id: current_user.id)[0]
+    return ShoppingCart.find_by buyer_id: current_user.id
   end
 end

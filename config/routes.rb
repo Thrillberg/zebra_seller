@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :shopping_carts
   resources :products do
     post :add_to_cart
+    post :remove_from_cart
   end
 
   root to: 'products#index'

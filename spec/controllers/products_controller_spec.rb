@@ -3,9 +3,6 @@ require 'database_cleaner'
 
 RSpec.describe ProductsController, type: :controller do
   setup :activate_authlogic
-  before(:each) do
-    request.env["HTTP_REFERER"] = "http://localhost:3000/"
-  end
 
   describe "POST #add_to_cart" do
     before :each do

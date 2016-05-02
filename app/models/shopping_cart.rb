@@ -13,7 +13,6 @@ class ShoppingCart < ActiveRecord::Base
   belongs_to :user, foreign_key: :buyer_id
 
   def add_product(product)
-    items = self.shopping_cart_items
     item = self.shopping_cart_items.find_by product_id: product.id
     if item
       item.quantity += 1
@@ -22,5 +21,11 @@ class ShoppingCart < ActiveRecord::Base
       self.products << product
       self.save
     end
+  end
+
+  def remove_product(product)
+    item = self.shopping_cart_items.find_by product_id: product.id
+    item.quantity -= 1
+    item.save
   end
 end

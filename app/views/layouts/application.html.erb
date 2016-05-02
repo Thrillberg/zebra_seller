@@ -11,6 +11,7 @@
     <div class="row panel panel-default">
       <div class="panel-heading">
         <% if current_user %>
+          <%= link_to "Home", root_path %> |
           <%= link_to "Logout", logout_path %>
         <% else %>
           <%= link_to "Register", new_user_path %> |

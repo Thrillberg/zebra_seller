@@ -17,6 +17,14 @@ class ProductsController < ApplicationController
       @cart.add_product(product)
     end
     flash[:notice] = "#{Product.find(params[:product_id]).name} has been added to your cart"
-    redirect_to :back
+    redirect_to root_path
+  end
+
+  def remove_from_cart
+    @cart = ShoppingCart.find_by buyer_id: current_user.id
+    product = Product.find params[:product_id]
+    @cart.remove_product(product)
+    flash[:notice] = "#{Product.find(params[:product_id]).name} has been removed from your cart"
+    redirect_to root_path
   end
 end
