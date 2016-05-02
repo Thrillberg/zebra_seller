@@ -38,6 +38,13 @@ gem "twitter-bootstrap-rails"
 
 group :development, :test do
   gem 'pry'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 
 group :development do
