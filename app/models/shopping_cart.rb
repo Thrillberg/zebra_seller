@@ -14,16 +14,13 @@ class ShoppingCart < ActiveRecord::Base
 
   def add_product(product)
     items = self.shopping_cart_items
-    item = self.shopping_cart_items.where(product_id: product.id)[0]
-    if items.map {|i| i.product_id}.include? product.id
+    item = self.shopping_cart_items.find_by product_id: product.id
+    if item
       item.quantity += 1
       item.save
-      item.reload
     else
       self.products << product
       self.save
-      items.last.quantity = 1
-      items.last.save
     end
   end
 end

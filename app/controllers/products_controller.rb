@@ -4,14 +4,14 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find params[:id]
   end
 
   def add_to_cart
-    @cart = ShoppingCart.where(buyer_id: current_user.id)[0]
-    product = Product.find(params[:product_id])
+    @cart = ShoppingCart.find_by buyer_id: current_user.id
+    product = Product.find params[:product_id]
     if @cart == nil
-      @cart = ShoppingCart.new(buyer_id: current_user.id)
+      @cart = ShoppingCart.new buyer_id: current_user.id
       @cart.add_product(product)
     else
       @cart.add_product(product)

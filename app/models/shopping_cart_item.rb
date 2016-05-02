@@ -12,4 +12,7 @@
 class ShoppingCartItem < ActiveRecord::Base
   belongs_to :shopping_cart
   belongs_to :product
+  before_validation(on: :create) do
+    self.quantity = 1
+  end
 end
