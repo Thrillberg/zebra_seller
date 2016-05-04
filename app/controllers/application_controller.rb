@@ -19,8 +19,11 @@ class ApplicationController < ActionController::Base
 
   def buyers_shopping_cart
     cart = ShoppingCart.find_by buyer_id: current_user.id
-    quantities = cart.shopping_cart_items.map {|i| i.quantity}
-    return nil if quantities.count(0) == quantities.length
-    return cart
+    if cart
+      quantities = cart.shopping_cart_items.map {|i| i.quantity}
+      return nil if quantities.count(0) == quantities.length
+      return cart
+    end
+    return nil
   end
 end

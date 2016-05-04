@@ -5,6 +5,19 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def new
+    @product = Product.new
+  end
+
+  def create
+    @product = Product.new(clean_params)
+    if @product.save
+      redirect_to root_path
+    else
+      render :action => 'new'
+    end
+  end
+
   def show
     @product = Product.find params[:id]
   end
@@ -18,7 +31,6 @@ class ProductsController < ApplicationController
     else
       @cart.add_product(product)
     end
-    flash[:notice] = "#{Product.find(params[:product_id]).name} has been added to your cart"
 
     respond_to do |format|
       format.html { redirect_to root_path }
@@ -30,11 +42,16 @@ class ProductsController < ApplicationController
     @cart = ShoppingCart.find_by buyer_id: current_user.id
     product = Product.find params[:product_id]
     @cart.remove_product(product)
-    flash[:notice] = "#{Product.find(params[:product_id]).name} has been removed from your cart"
 
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js { render json: @cart.shopping_cart_items.find_by(product_id: product.id).quantity }
     end
+  end
+
+  private
+
+  def clean_params
+    params.require(:product).permit(:name, :price, :description, :seller_id)
   end
 end

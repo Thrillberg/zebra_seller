@@ -1,0 +1,20 @@
+<%= form_for @product do |f| %>
+  <fieldset class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </fieldset>
+
+  <%= f.hidden_field :seller_id, :value => current_user.id %>
+
+  <%= f.submit "Add Zebra to Inventory", class: "btn btn-primary" %>
+<% end %>

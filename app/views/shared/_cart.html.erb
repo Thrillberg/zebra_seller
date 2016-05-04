@@ -1,27 +1,30 @@
 <% if current_user %>
   <h4><%= current_user.email %>'s shopping cart</h4>
-
   <% if buyers_shopping_cart %>
-    <% buyers_shopping_cart.products.each do |product| %>
-      <% if product.shopping_cart_items.find_by(product_id: product.id).quantity != 0 %>
-        <strong><%= product.name %></strong><br />
-        <%= product.price %><br />
-        <%= product.description %><br />
-        Quantity: <span id="quantity"><%= product.shopping_cart_items.find_by(product_id: product.id).quantity %></span>
+    <div class="cart" data-cartid="<%= buyers_shopping_cart.id %>">
+      <a href="#" class="clear_cart btn btn-danger">Clear Shopping Cart</a>
+      <hr />
+      <% buyers_shopping_cart.products.each do |product| %>
+        <% if product.shopping_cart_items.find_by(product_id: product.id).quantity != 0 %>
+          <div class="product" data-productid="<%= product.id %>">
+            <strong><%= product.name %></strong><br />
+            <%= product.price %><br />
+            <%= product.description %><br />
+            Quantity: <span class="quantity"><%= product.shopping_cart_items.find_by(product_id: product.id).quantity %></span>
 
-        <%= content_tag 'div', '', id: 'productId', data: { id: product.id } %>
+              <a href="#" class="increment btn btn-default">+</a>
 
-          <a href="#" class="increment btn btn-default">+</a>
+            <% unless product.shopping_cart_items.find_by(product_id: product.id).quantity == 0 %>
 
-        <% unless product.shopping_cart_items.find_by(product_id: product.id).quantity == 0 %>
-
-          <a href="#" class="decrement btn btn-default">-</a>
+              <a href="#" class="decrement btn btn-default">-</a>
+            <% end %>
+            <br />
+          </div>
         <% end %>
-        <br />
+      <hr />
       <% end %>
-    <hr />
+    <% else %>
+      Empty. Buy things!
     <% end %>
-  <% else %>
-    Empty. Buy things!
-  <% end %>
+  </div>
 <% end %>

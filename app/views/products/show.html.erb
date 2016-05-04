@@ -4,10 +4,10 @@
 <%= @product.price %><br />
 <% if current_user %>
   <%= form_tag product_add_to_cart_path(@product) do %>
-    <% submit_tag "Add to Cart" %>
+    <% submit_tag "Buy a #{@product.name}" %>
   <% end %>
-  <% else %>
-    Log in to buy!
+<% else %>
+  Log in to buy!
 <% end %>
 
 <%= render 'shared/cart' %>

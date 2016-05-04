@@ -2,11 +2,18 @@ var Buttons = {
   initialize: function() {
     $(".increment").click(function(e) {
       e.preventDefault();
-      Buttons.increment();
+      var button = this
+      Buttons.increment(button);
     });
     $(".decrement").click(function(e) {
       e.preventDefault();
-      Buttons.decrement();
+      var button = this
+      Buttons.decrement(button);
+    });
+    $(".clear_cart").click(function(e) {
+      e.preventDefault();
+      var button = this
+      Buttons.clear_cart(button);
     });
   },
 
@@ -20,13 +27,47 @@ var Buttons = {
     })
   },
 
-  increment: function() {
-    this.makeRequest("POST", '/products/' + document.getElementById("productId").getAttribute("data-id") + '/add_to_cart.js', { id: document.getElementById("productId").getAttribute("data-id") }, function(data) { $('#quantity').html(data); }, function(jqXHR, err, exception) { console.log(jqXHR); console.log(err); console.log(exception); })
+  increment: function(button) {
+    var type = "POST"
+    var productId = $(button).closest(".product").data("productid")
+    var url = '/products/' + productId + '/add_to_cart.js'
+
+    this.makeRequest(
+      type,
+      url,
+      { id: productId },
+      function(data) { $('div[data-productid=' + productId + ']').find('.quantity').html(data) },
+      function(jqXHR, err, exception) { console.log(jqXHR); console.log(err); console.log(exception);
+    })
   },
 
-  decrement: function() {
-    this.makeRequest("POST", '/products/' + document.getElementById("productId").getAttribute("data-id") + '/remove_from_cart.js', { id: document.getElementById("productId").getAttribute("data-id") }, function(data) { $('#quantity').html(data); }, function(jqXHR, err, exception) { console.log(jqXHR); console.log(err); console.log(exception); })
-  }
+  decrement: function(button) {
+    var type = "POST"
+    var productId = $(button).closest(".product").data("productid")
+    var url = '/products/' + productId + '/remove_from_cart.js'
+
+    this.makeRequest(
+      type,
+      url,
+      { id: productId },
+      function(data) { $('div[data-productid=' + productId + ']').find('.quantity').html(data) },
+      function(jqXHR, err, exception) { console.log(jqXHR); console.log(err); console.log(exception);
+    })
+  },
+
+  clear_cart: function(button) {
+    var type = "POST"
+    var cartId = $(button).closest(".cart").data("cartid")
+    var url = '/shopping_carts/' + cartId + '/clear_cart.js'
+
+    this.makeRequest(
+      type,
+      url,
+      { id: cartId },
+      function(data) { $('.cart').html(data); },
+      function(jqXHR, err, exception) { console.log(jqXHR); console.log(err); console.log(exception);
+    })
+  },
 }
 
 $(document).ready(function(){
