@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  # respond_to :html, :js
+
   def index
     @products = Product.all
   end
@@ -17,7 +19,11 @@ class ProductsController < ApplicationController
       @cart.add_product(product)
     end
     flash[:notice] = "#{Product.find(params[:product_id]).name} has been added to your cart"
-    redirect_to root_path
+
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js { render json: @cart.shopping_cart_items.find_by(product_id: product.id).quantity }
+    end
   end
 
   def remove_from_cart
@@ -25,6 +31,10 @@ class ProductsController < ApplicationController
     product = Product.find params[:product_id]
     @cart.remove_product(product)
     flash[:notice] = "#{Product.find(params[:product_id]).name} has been removed from your cart"
-    redirect_to root_path
+
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js { render json: @cart.shopping_cart_items.find_by(product_id: product.id).quantity }
+    end
   end
 end
