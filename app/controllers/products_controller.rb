@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
     @cart = ShoppingCart.find_by buyer_id: current_user.id
     product = Product.find params[:product_id]
     @cart.remove_product(product)
-
+    # binding.pry
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js { render json: @cart.shopping_cart_items.find_by(product_id: product.id).quantity }

@@ -4,11 +4,17 @@ var Buttons = {
       e.preventDefault();
       var button = this
       Buttons.increment(button);
+      if ($(".cart").find(".quantity").text() == 0) {
+        $(".cart").find(".decrement")[0].style.display = "inline";
+      };
     });
     $(".decrement").click(function(e) {
       e.preventDefault();
       var button = this
       Buttons.decrement(button);
+      if ($(".cart").find(".quantity").text() == 1) {
+        $(".cart").find(".decrement")[0].style.display = "none";
+      };
     });
     $(".clear_cart").click(function(e) {
       e.preventDefault();

@@ -11,6 +11,7 @@
             <%= product.price %><br />
             <%= product.description %><br />
             Quantity: <span class="quantity"><%= product.shopping_cart_items.find_by(product_id: product.id).quantity %></span>
+            <br />
 
               <a href="#" class="increment btn btn-default">+</a>
 

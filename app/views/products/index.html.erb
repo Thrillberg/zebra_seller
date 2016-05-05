@@ -1,9 +1,13 @@
 <h1>Zebra Seller</h1>
 
-<i>Click on a product below to sell or buy it!</i>
+<i>Click on a product below to buy it!</i>
+<hr />
 
 <% @products.each do |product| %>
-  <h5><%= link_to product.name, product_path(product) %></h5><br />
+  <%= link_to product.name, product_path(product) %>
+  from <strong><%= product.seller.email %></strong>
+  <br />
+  $<%= product.price %><hr />
 <% end %>
 <hr />
 <h2><%= link_to "Want to sell a zebra?", new_product_path, class: "btn btn-primary" %></h2>
