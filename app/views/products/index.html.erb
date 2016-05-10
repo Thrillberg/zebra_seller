@@ -4,7 +4,7 @@
       <h1>Zebra Seller</h1>
     </div>
     <div class="col-lg-6">
-      <% if current_user.seller == false %>
+      <% if current_user && current_user.seller == false %>
         <%= button_to "Are you a zebra seller?", user_toggle_zebra_seller_path(current_user), class: "btn btn-primary" %>
       <% else %>
         <button class="btn btn-danger" data-toggle="modal" data-target="#modal-window">Stop selling zebras?</button>
@@ -26,19 +26,21 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-lg-6" id="seller-only">
-      <i>Your zebras for sale.</i>
-      <hr />
-      <% @products.each do |product| %>
-        <% if product.seller == current_user %>
-          <%= link_to product.name, product_path(product) %>
-          from <strong><%= product.seller.email %></strong>
-          <br />
-          $<%= product.price %><hr />
+    <% if current_user && current_user.seller %>
+      <div class="col-lg-6">
+        <i>Your zebras for sale.</i>
+        <hr />
+        <% @products.each do |product| %>
+          <% if product.seller == current_user %>
+            <%= link_to product.name, product_path(product) %>
+            from <strong><%= product.seller.email %></strong>
+            <br />
+            $<%= product.price %><hr />
+          <% end %>
         <% end %>
-      <% end %>
-      <h2><%= link_to "Want to sell a different zebra?", new_product_path, class: "btn btn-primary" %></h2>
-    </div>
+        <h2><%= link_to "Add a zebra", new_product_path, class: "btn btn-primary" %></h2>
+      </div>
+    <% end %>
   </div>
 </div>
 <%= render 'shared/cart' %>

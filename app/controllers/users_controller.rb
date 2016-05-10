@@ -18,7 +18,9 @@ class UsersController < ApplicationController
       current_user.seller = true
       current_user.save
     else
-      Product.where(seller: current_user).clear
+      Product.where(seller: current_user).each do |product|
+        product.destroy
+      end
       current_user.seller = false
       current_user.save
     end
@@ -28,6 +30,6 @@ class UsersController < ApplicationController
   private
 
   def clean_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :seller)
   end
 end

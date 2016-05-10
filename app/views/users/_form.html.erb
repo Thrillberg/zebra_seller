@@ -11,5 +11,9 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </p>
+  <p>
+    <%= f.label "Do you sell zebras?" %>
+    <%= f.check_box :seller %>
+  </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>
