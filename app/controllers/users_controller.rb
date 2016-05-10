@@ -13,6 +13,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def toggle_zebra_seller
+    if current_user.seller == false
+      current_user.seller = true
+      current_user.save
+    else
+      Product.where(seller: current_user).clear
+      current_user.seller = false
+      current_user.save
+    end
+    redirect_to root_path
+  end
+
   private
 
   def clean_params

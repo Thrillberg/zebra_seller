@@ -1,0 +1,8 @@
+.center-items {
+  display: flex;
+  align-items: center;
+}
+
+#seller-only {
+  display: none;
+}

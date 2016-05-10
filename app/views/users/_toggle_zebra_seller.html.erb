@@ -1,0 +1,17 @@
+<div class="modal fade" id="modal-window" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-window">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        If you are no longer a seller, all of your zebras for sale will be removed.
+      </div>
+      <div class="modal-footer">
+        <%= button_to "I'm getting too old for this business. Remove my zebras.", user_toggle_zebra_seller_path(current_user), class: "btn btn-danger" %>
+        <br />
+        <button type="button" class="btn btn-primary" data-dismiss="modal">No wait, I want to keep selling zebras!</button>
+      </div>
+    </div>
+  </div>
+</div>
