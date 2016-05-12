@@ -5,10 +5,7 @@ class ShoppingCartsController < ApplicationController
 
   def clear_cart
     @cart = ShoppingCart.find_by buyer_id: current_user.id
-    @cart.shopping_cart_items.each do |item|
-      item.quantity = 0
-      item.save
-    end
+    @cart.shopping_cart_items.clear
     render json: @cart
   end
 end

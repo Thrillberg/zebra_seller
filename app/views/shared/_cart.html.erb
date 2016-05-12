@@ -5,20 +5,20 @@
       <a href="#" class="clear_cart btn btn-danger">Clear Shopping Cart</a>
       <hr />
       <% buyers_shopping_cart.products.each do |product| %>
-        <% if product.shopping_cart_items.find_by(product_id: product.id).quantity != 0 %>
+        <% if product.shopping_cart_items.find_by(shopping_cart_id: buyers_shopping_cart.id).quantity != 0 %>
           <div class="product" data-productid="<%= product.id %>">
             <strong><%= product.name %></strong><br />
             <%= product.price %><br />
             <%= product.description %><br />
-            Quantity: <span class="quantity"><%= product.shopping_cart_items.find_by(product_id: product.id).quantity %></span>
+            Quantity: <span class="quantity"><%= product.shopping_cart_items.find_by(shopping_cart_id: buyers_shopping_cart.id).quantity %></span>
             <br />
 
               <a href="#" class="increment btn btn-default">+</a>
 
-            <% unless product.shopping_cart_items.find_by(product_id: product.id).quantity == 0 %>
+
 
               <a href="#" class="decrement btn btn-default">-</a>
-            <% end %>
+
             <br />
             <hr />
           </div>

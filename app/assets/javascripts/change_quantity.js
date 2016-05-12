@@ -2,18 +2,20 @@ var Buttons = {
   initialize: function() {
     $(".increment").click(function(e) {
       e.preventDefault();
-      var button = this
-      Buttons.increment(button);
-      if ($(".cart").find(".quantity").text() == 0) {
-        $(".cart").find(".decrement")[0].style.display = "inline";
+      var $button = $(this);
+      var $product = $button.closest(".product");
+      Buttons.increment($button);
+      if ($product.find(".quantity").text() == 0) {
+        $product.find(".decrement")[0].style.display = "inline";
       };
     });
     $(".decrement").click(function(e) {
       e.preventDefault();
-      var button = this
-      Buttons.decrement(button);
-      if ($(".cart").find(".quantity").text() == 1) {
-        $(".cart").find(".decrement")[0].style.display = "none";
+      var $button = $(this);
+      var $product = $button.closest(".product");
+      Buttons.decrement($button);
+      if ($product.find(".quantity").text() == 1) {
+        $product.find(".decrement")[0].style.display = "none";
       };
     });
     $(".clear_cart").click(function(e) {
