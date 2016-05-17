@@ -13,23 +13,43 @@ class UsersController < ApplicationController
     end
   end
 
-  def toggle_zebra_seller
-    if current_user.seller == false
-      current_user.seller = true
-      current_user.save
+  def edit
+    @user = User.find(params[:user_id])
+  end
+
+  def update
+    @user = User.find(params[:user_id])
+    toggle_zebra_seller
+    if !@user.seller && @user.update_attributes(clean_params)
+      params[:user][:seller] = false
+      @user.update_attributes({"seller" => params[:user][:seller]})
+      flash[:notice] = "You are no longer a seller."
+      redirect_to root_url
+    elsif @user.seller && @user.update_attributes(clean_params)
+      flash[:notice] = "You are registered as a zebra seller."
+      redirect_to root_url
     else
-      Product.where(seller: current_user).each do |product|
+      render 'edit'
+    end
+  end
+
+  def toggle_zebra_seller
+    @user = User.find(params[:user_id])
+    if @user.seller == false
+      @user.seller = true
+      @user.save
+    else
+      Product.where(seller: @user).each do |product|
         product.destroy
       end
-      current_user.seller = false
-      current_user.save
+      @user.seller = false
+      @user.save
     end
-    redirect_to root_path
   end
 
   private
 
   def clean_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :seller)
+    params.require(:user).permit(:email, :password, :password_confirmation, :seller, :ssn, :name, :address, :date_of_birth)
   end
 end

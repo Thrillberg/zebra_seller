@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if current_user && current_user.seller %>
   <div class="modal fade" id="modal-window" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -9,9 +9,48 @@
           If you are no longer a seller, all of your zebras for sale will be removed.
         </div>
         <div class="modal-footer">
-          <%= button_to "I'm getting too old for this business. Remove my zebras.", user_toggle_zebra_seller_path(current_user), class: "btn btn-danger" %>
+          <%= form_for @user, url: user_toggle_zebra_seller_path(@user, :user => @user.attributes) do |f| %>
+            <% f.hidden_field :seller %>
+            <% f.submit "I'm getting too old for this business. Remove my zebras.", class: "btn btn-danger" %>
+          <% end %>
           <br />
           <button type="button" class="btn btn-primary" data-dismiss="modal">No wait, I want to keep selling zebras!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="modal fade" id="modal-window" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-window">Zebra Seller Information</h4>
+        </div>
+        <div class="modal-body">
+          Please enter the following information to be a zebra seller.
+          <%= form_for @user, url: user_toggle_zebra_seller_path(@user) do |f| %>
+            <p>
+              <%= f.label :name %><br />
+              <%= f.text_field :name %>
+            </p>
+            <p>
+              <%= f.label :address %><br />
+              <%= f.text_field :address %>
+            </p>
+            <p>
+              <%= f.label :date_of_birth %><br />
+              <%= f.text_field :date_of_birth %>
+            </p>
+            <p>
+              <%= f.label "Social Security Number" %>
+              <%= f.text_field :ssn %>
+            </p>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Done", class: "btn btn-success" %>
+          <% end %>
+          <br />
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
