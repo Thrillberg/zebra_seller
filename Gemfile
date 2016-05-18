@@ -36,6 +36,9 @@ gem 'authlogic', '~> 3.4.0'
 # Bootstrap
 gem "twitter-bootstrap-rails"
 
+# Stripe
+gem 'stripe'
+
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
