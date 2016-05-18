@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get '/login' => 'user_sessions#new'
   get '/logout' => 'user_sessions#destroy'
-  # get 'user/toggle_zebra_seller' => 'user#toggle_zebra_seller', :as => :toggle_zebra_seller
 
   resources :user_sessions
   resources :users do

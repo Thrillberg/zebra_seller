@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517173150) do
+ActiveRecord::Schema.define(version: 20160518185602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,11 +53,22 @@ ActiveRecord::Schema.define(version: 20160517173150) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.boolean  "seller",            default: false
-    t.string   "name"
+    t.boolean  "seller",                default: false
     t.string   "ssn"
-    t.string   "address"
     t.string   "date_of_birth"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.datetime "tos_date"
+    t.string   "tos_ip"
+    t.string   "currency"
+    t.string   "stripe_account_type"
+    t.string   "stripe_user_id"
+    t.string   "secret_key"
+    t.string   "publishable_key"
+    t.text     "stripe_account_status", default: "{}"
   end
 
 end
